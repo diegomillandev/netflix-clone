@@ -2,6 +2,7 @@ import { NextPageContext } from "next";
 import { getSession } from "next-auth/react";
 import userCurrentUser from "@/hooks/useCurrentUser";
 import { useRouter } from "next/router";
+import { showName } from "@/utils/functions";
 
 export async function getServerSideProps(context: NextPageContext) {
   const sesion = await getSession(context);
@@ -19,19 +20,6 @@ export async function getServerSideProps(context: NextPageContext) {
     props: {},
   };
 }
-
-const showName = (name: string | null | undefined) => {
-  if (!name) return "";
-  const nameArray = name.split(" ");
-  let newName = "";
-
-  if (nameArray.length > 2) {
-    newName = `${nameArray[0]} ${nameArray[2]}`;
-  } else {
-    newName = `${nameArray[0]} ${nameArray[1] || ""}`;
-  }
-  return newName.toLowerCase();
-};
 
 const Profiles = () => {
   const router = useRouter();
