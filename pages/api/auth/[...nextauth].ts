@@ -39,7 +39,6 @@ export default NextAuth({
           credentials.password,
           user.hashedPassword
         );
-
         if (!isValid) {
           throw new Error("Incorrect password");
         }
