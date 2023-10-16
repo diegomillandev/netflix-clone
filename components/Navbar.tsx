@@ -14,11 +14,13 @@ const Navbar = () => {
 
   const toogleMobileMenu = useCallback(() => {
     setVisibleMenu((prev) => !prev);
-  }, []);
+    if (visibleAccountMenu) setVisibleAccountMenu(false);
+  }, [visibleAccountMenu]);
 
   const toogleAccountMenu = useCallback(() => {
     setVisibleAccountMenu((prev) => !prev);
-  }, []);
+    if (visibleMenu) setVisibleMenu(false);
+  }, [visibleMenu]);
 
   function handleResize(e: Event): void {
     if (e.target instanceof Window) {
@@ -55,13 +57,8 @@ const Navbar = () => {
         items-center
         transition
         duration-500
-        bg-zinc-900
-        bg-opacity-90
-        ${
-          isScrolled
-            ? "backdrop-filter backdrop-blur-sm bg-opacity-100"
-            : "backdrop-filter backdrop-blur-sm bg-opacity-0"
-        }
+        
+        ${isScrolled ? "bg-zinc-900 bg-opacity-90" : ""}
         `}
       >
         <img src="/images/logo.png" alt="image logo" className="h-4 lg:h-7" />
